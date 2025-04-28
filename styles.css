@@ -11,7 +11,10 @@ body {
   line-height: 1.8;
   font-size: 18px; /* 整体基础字体稍大，清爽 */
 }
-
+.content-wrapper {
+  margin: 0 auto;
+  width: calc(100% - 600px); /* 左右各300px，总共600px空隙 */
+}
 header {
   background-color: #4a6077;
   color: #fff;
