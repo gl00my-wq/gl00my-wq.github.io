@@ -14,20 +14,14 @@ body {
   display: flex;
   flex-direction: column;
 }
-.content-wrapper {
-  margin: 0 auto;
-/*   width: calc(100% - 600px); /* 左右各300px，总共600px空隙 */ */
-}
+
 header {
   background-color: #4a6077;
   color: #fff;
   padding: 30px 20px;
   text-align: center;
 }
-.content-wrapper {
-  margin: 0 auto;
-  /* width: calc(100% - 600px); 左右各300px，总共600px空隙 */
-}
+
 h1 {
   font-size: 3em; /* 比原来大，更有比赛主页感觉 */
   margin-bottom: 10px;
