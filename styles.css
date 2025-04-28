@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e7e7ee;
+  color: #333;
+  line-height: 1.8;
+  font-size: 18px; /* 整体基础字体稍大，清爽 */
+}
+
+header {
+  background-color: #4a6077;
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em; /* 比原来大，更有比赛主页感觉 */
+  margin-bottom: 10px;
+}
+
+.challenge-title h2 {
+  font-size: 2em; /* 副标题稍小，但依然醒目 */
+  font-weight: normal;
+  
+  padding-left: 50px;
+  padding-right: 50px;
+  
+}
+
+.challenge-details {
+  padding: 50px;
+  background-color: #ffffff;
+  margin: 60px 300px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-around; /* 间距更均匀 */
+}
+
+nav ul li {
+  flex: 1;
+  text-align: center;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #3498db;
+  font-weight: bold;
+  display: block;
+  padding: 12px 0;
+  font-size: 20px; /* 导航字体加大，更易点 */
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.content-section {
+  display: none;
+  font-size: 18px;
+}
+
+.content-section p,
+.content-section li {
+  margin-bottom: 12px;
+  font-size: 18px; /* 保持正文统一大字体 */
+}
+
+pre {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  font-family: Consolas, monospace;
+  font-size: 16px;
+}
+
+footer {
+  background-color: #4a6077;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+}
+
+footer p {
+  font-size: 1.2em;
+}
+p.subsection-title {
+  font-size: 1.8em; /* 比正文稍大 */
+  font-weight: bold;
+  margin: 20px 0 20px 0; /* 上下留白，和正文拉开距离 */
+  color: #2c3e50; /* 深一点的颜色，突出 */
+}
+ul {
+  padding: 0; /* 取消ul的默认缩进 */
+  list-style-position: inside; /* 可选：将圆点放置在列表项内部 */
+}
+
+ul li {
+  margin-left: 20px; /* 为每个列表项添加缩进 */
+}
+.no-bullet {
+  list-style-type: none; /* 去掉圆点 */
+}
+.highlight {
+  font-weight: bold;  /* 使文本加粗 */
+  color: red;         /* 改变文本颜色 */
+  /* background-color: yellow; 添加背景颜色 */
+}
+/* 公式 */
+.formula {
+  font-size: 2em;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center; /* 居中公式 */
+}
+
+nav ul li a.active {
+  background-color: #585a5c;
+  color: white;
+  border-radius:15px
+}
+.content-section {
+  display: none; /* 默认隐藏内容 */
+}
+.active-content {
+  display: block; /* 激活内容区域 */
+}

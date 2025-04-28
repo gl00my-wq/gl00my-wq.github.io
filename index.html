@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VCIP 2025 Grand Challenge on Live Broadcasting VQA</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+<body onload="showContent(1)">
+  
+  <header>
+    <h1>Grand Challenges:</h1>
+    <div class="challenge-title">
+      <h2>VCIP 2025 Grand Challenge on Live Broadcasting Video Quality Assessment</h2>
+    </div>
+  </header>
+
+  <section class="challenge-details">
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showContent(1)">Challenge Description </a></li>
+        <li><a href="#" onclick="showContent(2)">Submission Requirements</a></li>
+        <li><a href="#" onclick="showContent(3)">Evaluation Criteria</a></li>
+        <li><a href="#" onclick="showContent(4)">Organizers</a></li>
+      </ul>
+    </nav>
+
+    <div id="content1" class="content-section">
+      <p class="subsection-title">Challenge Introduction:</p>
+      <p>With the rise of live broadcasting services, users have a higher expectation of video quality. The great variations of videographic skills in shot environment, photographic apparatus, compression and processing protocols give rise to very complicated impairments in the live broadcasting videos, which can adversely impact the quality of experience (QoE) of end users.The complexity of distortion in live broadcasting videos and the fact that user experience is subjective and hard to quantify and measure pose challenges to QoE-based live video quality assessment (VQA).
+        To address this challenge, we have built a large VQA database for live broadcasting with the associated QoE scores. It consists of 1013 videos with a carefully selected range of distortion type and intensity, focusing on the complicated impairments induced in the live broadcasting services. The paper can be found at <a href="https://ieeexplore.ieee.org/document/8802978" target="_blank">here.</a></p>
+      <p>Our dataset fills the gap in publicly available datasets for studying the comprehensive effects of distortions in live video. We also conducted a subjective experiment, and with the analysis of the collected subjective data, it was found that the test results in the proposed database were not satisfactory, indicating that further work has to be done to deeply measure the characteristics of those specific distortions in live broadcasting videos. This proposed competition invites participants to benchmark their models on our publicly available database.</p>
+
+      <p class="subsection-title"> Challenge Significance:</p>
+      <p>The competition aims to foster innovation in both subjective and objective VQA techniques tailored to live broadcasting videos, addressing the unique challenges posed by live streaming impairments while emphasizing the evaluation of QoE. It also encourages the exploration of novel perceptual metrics that integrate QoE evaluation with learning-based approaches, extending beyond traditional distortion-focused methods.
+      The competition is highly relevant to the fields of visual communication and video processing, as it supports the development of practical algorithms that can be applied in real-world scenarios such as live video streaming, content recommendation, mobile video capturing, and video enhancement. By advancing the state-of-the-art in live video quality assessment, this challenge will contribute to optimizing the visual quality and Quality of Experience (QoE) for live streaming platform users.</p>
+    </div>
+
+    <div id="content2" class="content-section">
+      <p class="subsection-title">Submission Requirements:</p>
+      <p>The participants are required to follow the steps to submit their results:</p>
+      <!-- 第一部分----结果部分 -->
+      <p class="subsection-title">A.Results</p>
+      <ul>
+        <li  class="no-bullet">(1) Process all video files and store predicted scores in a structured JSON output file named <code>result.json</code>. The output structure should preserve the original video processing order through sequential array positioning, with each entry containing:</li>
+        <li>	video_name: Original filename (string)</li>
+        <li>scores: Corresponding predicted scores (float array)</li>
+      </ul>
+
+      <ul>
+        <li class="no-bullet">(2) To ensure order consistency:</li>
+        <li>Maintain native file sequence from the processing pipeline</li>
+        <li>Implement explicit sorting with Python's sorted() before JSON serialization</li>
+      </ul>
+
+<pre>[
+  {"video_name": "video_001.mp4", "scores": [0.92, 0.85, 0.78]},
+  {"video_name": "video_002.mp4", "scores": [0.88, 0.91, 0.82]},
+  {"video_name": "video_003.mp4", "scores": [0.95, 0.87, 0.89]}
+]</pre>
+      
+        <li class="no-bullet"><strong>Technical guidance:</strong></li>
+      <ul>
+        <li>	Use json.dump() with indent=4 parameter for human-readable formatting</li>
+        <li>Validate JSON structure with jsonlint before deployment </li>
+      </ul>
+<!-- 第二部分----时间复杂度 -->
+      <p class="subsection-title">B. Computational Complexity Analysis</p>
+      
+        <li class="no-bullet"><strong>(1) Execution Time Measurement:</strong></li>
+        <ul>
+          <li>Per-video processing time (ms)</li>
+          <li>Total pipeline duration (seconds)</li>
+          <li>Time complexity trend analysis (linear/polynomial/exponential)</li>
+        </ul>
+        <li class="no-bullet"><strong>(2) Temporal Statistics Example:</strong></li>
+<pre>
+Time Metrics:
+- Average processing time per frame: 34.2 ± 2.8 ms
+- Total execution duration: 12m 45s
+- Complexity scaling factor: O(n^1.1) observed
+</pre>
+      <!-- 第三部分----环境部分-->
+      <p class="subsection-title">C.Environment</p>
+      
+<pre>
+Hardware Configuration:
+- CPU: Intel Xeon Platinum 8480CL @ 2.4GHz (64 cores)
+- GPU: NVIDIA A100 80GB PCIe
+- Memory: 512GB DDR5 ECC
+- Storage: NVMe SSD RAID-0 Array
+
+Software Environment:
+- OS: Ubuntu 22.04 LTS
+- Python: 3.10.12
+- CUDA: 12.2
+- Dependencies:
+  • OpenCV 4.8.0
+  • PyTorch 2.1.1+cu121
+  • NumPy 1.26.2
+</pre>
+
+
+<!-- 第四部分----benchmark 信息 -->
+      <p class="subsection-title">D. Benchmarking Information</p>
+
+<pre>
+[Benchmark Parameters]
+Batch Size: 16  
+Precision: FP16  
+Warmup Iterations: 100  
+Measurement Iterations: 1000  
+</pre>
+
+      <li class="no-bullet"><strong>Implementation Guidance:</strong></li>
+        <ul>
+          <li>	Use Python's time.perf_counter() for microsecond-level measurements</li>
+          <li>	Record environment details via pip freeze > requirements.txt</li>
+          <li>	Include hardware fingerprints using nvidia-smi and lscpu outputs</li>
+          
+        </ul>
+
+      <p class="subsection-title">E. Summarize</p>
+      <ul>
+        <li class="no-bullet">	(1)Store the predicted scores in a structured JSON file named <span class="highlight">result.json</span> according to requirement A</li>
+        <li class="no-bullet">	(2)Store computational metrics and system configurations in a standardized text file <span class="highlight">benchmark_report.txt</span> using human-readable key-value pairs according to requirement B,C,D</li>
+        <li class="no-bullet">	(3)(Optional) Create a paper in the VCIP paper template to describe the designed VQA method for this challenge. It should give a detailed description of the proposed evaluation scheme and the computational complexity analysis.</li>
+        <li class="no-bullet">  (4)Create and send a ZIP package named <span class="highlight">submission.zip</span>, which contains the result.json, benchmark_report.txt files and the research paper (if any).</li>
+      </ul>
+
+      <p class="subsection-title">Important Dates:</p>
+      <ul>
+        <li>2025.04.20: Release of train and validation data</li>
+        <li>2025.05.25: Release of final test data</li>
+        <li>2025.06.04: Test output results submission deadline</li>
+        <li>2025.06.05: Code submission deadline</li>
+        <li>2025.06.15: Winner announcement</li>
+        <li>2025.06.30: Challenge paper submission deadline</li>
+      </ul>
+    </div>
+
+    <div id="content3" class="content-section">
+      <p class="subsection-title">Evaluation:</p>
+      <p>The evaluation consists of the comparison of the predictions with the reference ground truth, Mean Opinion Scores (MOS). We will assess your solutions based on Pearson Linear Correlation Coefficient (PLCC) and Spearman’s Rank-order Correlation Coefficient (SRCC).
+        </p>
+
+    <div class="section">
+      <h2>1. Pearson Linear Correlation Coefficient (PLCC)</h2>
+      <p>Pearson’s linear correlation coefficient (PLCC) is a measure of the linear correlation between the subjective scores and the mapped scores, which means the prediction accuracy:</p>
+      <div class="formula">
+        <p>\( PLCC = 1 - \frac{\sum_{i=1}^{N} (s_i - \bar{s})(f_i - \bar{f})}{\sqrt{\sum_{i=1}^{N} (s_i - \bar{s})^2 \sum_{i=1}^{N} (f_i - \bar{f})^2}} \)</p>
+      </div>
+      <p>Where:</p>
+      <ul>
+        <li><b>\( s_i \)</b> and <b>\( \bar{s} \)</b> are the \(i\)-th subjective score and the mean of all \(s_i\)</li>
+        <li><b>\( f_i \)</b> and <b>\( \bar{f} \)</b> are the \(i\)-th mapped objective score after the non-linear mapping and the mean of all \(f_i\).</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>2. Spearman’s Rank-order Correlation Coefficient (SRCC)</h2>
+      <p>Spearman’s Rank-order Correlation Coefficient (SRCC) computes the prediction monotonicity and indicates how well the relationship between subjective and objective quality can be depicted by a monotonic function:</p>
+      <div class="formula">
+        <p>\( SRCC = 1 - \frac{6 \sum_{i=1}^{N} d_i^2}{N(N^2 - 1)} \)</p>
+      </div>
+      <p>Where:</p>
+    <ul>
+      <li><b>\( N \)</b> represents the size of the testing dataset.</li>
+      <li><b>\( d_i \)</b> is the rank difference of the \(i\)-th video’s subjective and objective scores.</li>
+    </ul>
+    </div>
+    </div>
+    <div id="content4" class="content-section">
+      <div class="organizer">
+        <h2>Organizer 1</h2>
+        <ul>
+          <li><b>Name:</b> Pengfei Chen</li>
+          <li><b>Unit/Institution:</b> Xidian University</li>
+          <li><b>Email:</b> <a href="mailto:chenpengfei@xidian.edu.cn">chenpengfei@xidian.edu.cn</a></li>
+          <li><b>Homepage:</b> <a href="https://scholar.google.com.hk/citations?user=LXEuY3IAAAAJ&hl=zh-CN" target="_blank">Google Scholar Profile</a></li>
+          <li><b>Introduction:</b> Pengfei Chen is a tenure-track Associate Professor at the School of Artificial Intelligence, Xidian University. He received his Bachelor's degree from Xidian University in 2014 and his Ph.D. from China University of Mining and Technology in 2022. His main research areas include image/video quality assessment, domain adaptation/domain generalization, and self-supervised learning. In recent years, leveraging the Ministry of Education Key Laboratory of Intelligent Perception and Image Understanding at Xidian University, he has conducted fruitful research in video quality assessment (VQA) and video Quality of Experience (QoE) evaluation. He has published over 20 papers in internationally renowned journals and conferences, such as IEEE TIP, ICCV, ACM MM, and Pattern Recognition, which have been cited more than 500 times according to Google Scholar. His innovative contributions have been successfully applied in various commercial products and in the defense and security sectors. Pengfei currently serves as a reviewer for several academic journals and conferences, including IEEE TIP, TMM, TCSVT, CVPR, ICCV, ACM MM, and AAAI.</li>
+        </ul>
+      </div>
+    
+      <div class="organizer">
+        <h2>Organizer 2</h2>
+        <ul>
+          <li><b>Name:</b> Leida Li</li>
+          <li><b>Unit/Institution:</b> Xidian University</li>
+          <li><b>Homepage:</b> <a href="https://web.xidian.edu.cn/ldli/en/" target="_blank">Leida Li's Homepage</a></li>
+          <li><b>Email:</b> <a href="mailto:ldli@xidian.edu.cn">ldli@xidian.edu.cn</a></li>
+          <li><b>Introduction:</b> Leida Li received the B.E. and Ph.D. degrees from Xidian University in 2004 and 2009, respectively. From Feb. to Jun. 2008, he was a research associate in Kaohsiung University of Science and Technology, Taiwan. From Jan. 2014 to Jan. 2015, he was a Research Fellow with the Rapid-rich Object SEarch (ROSE) Lab, School of Electrical and Electronic Engineering, Nanyang Technological University (NTU), Singapore, working with Prof. Alex C. Kot and Prof. Weisi Lin. From Jul. 2016 to Jul. 2017, he was a Senior Research Fellow in ROSE lab, NTU, Singapore. From July 2009 to June 2019, he worked as Lecturer, Associate Professor and Professor, in the School of Information and Control Engineering, China University of Mining and Technology, China. Currently, he is a Full Professor with the School of Artificial Intelligence, Xidian University, China. He is an Associate Editor of IEEE Transactions on Image Processing (TIP) and Journal of Visual Communication and Image Representation (JVCI Best Associate Editor Award 2021/2023), Young Associate Editor of Journal of Image and Graphics (Excellent Editor Award 2022). His research interests include image processing and recognition, multimedia quality assessment, information hiding and image forensics. He has published more than 100 papers in these areas with 8000+ citations. He is a senior member of IEEE/CCF/CSIG.</li>
+        </ul>
+      </div>
+    
+      <div class="organizer">
+        <h2>Other Organizers</h2>
+        <ul>
+          <li><b>Jinjian Wu:</b> <a href="mailto:jinjian.wu@mail.xidian.edu.cn">jinjian.wu@mail.xidian.edu.cn</a></li>
+          <li><b>Yipo Huang:</b> <a href="mailto:yipo.huang@ntu.edu.sg">yipo.huang@ntu.edu.sg</a></li>
+        </ul>
+      </div>
+    
+    </div>
+
+  </section>
+
+  <footer>
+    <p>Powered by VCIP 2025 Challenge Team</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
