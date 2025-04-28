@@ -21,7 +21,9 @@ header {
   padding: 30px 20px;
   text-align: center;
 }
-
+.content {
+  flex: 1; /* 自动撑开剩余空间，footer就能贴底了 */
+}
 h1 {
   font-size: 3em; /* 比原来大，更有比赛主页感觉 */
   margin-bottom: 10px;
@@ -73,6 +75,7 @@ nav ul li a:hover {
 .content-section {
   display: none;
   font-size: 18px;
+  flex: 1;
 }
 
 .content-section p,
