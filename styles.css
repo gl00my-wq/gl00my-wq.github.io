@@ -13,7 +13,7 @@ body {
 }
 .content-wrapper {
   margin: 0 auto;
-  width: calc(100% - 600px); /* 左右各300px，总共600px空隙 */
+/*   width: calc(100% - 600px); /* 左右各300px，总共600px空隙 */ */
 }
 header {
   background-color: #4a6077;
