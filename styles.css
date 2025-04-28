@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-body {
+html,body {
   font-family: Arial, sans-serif;
   background-color: #e7e7ee;
   color: #333;
@@ -73,15 +73,18 @@ nav ul li a:hover {
 }
 
 .content-section {
-  display: none;
+  /* display: none; */
   font-size: 18px;
   flex: 1;
+  flex-direction: column; /* 垂直排列 */
 }
 
 .content-section p,
 .content-section li {
   margin-bottom: 12px;
   font-size: 18px; /* 保持正文统一大字体 */
+  flex: 1;
+
 }
 
 pre {
