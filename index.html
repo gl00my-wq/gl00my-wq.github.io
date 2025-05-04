@@ -45,7 +45,7 @@
       <ul>
         <li  class="no-bullet">(1) Process all video files and store predicted scores in a structured JSON output file named <code>result.json</code>. The output structure should preserve the original video processing order through sequential array positioning, with each entry containing:</li>
         <li>	video_name: Original filename (string)</li>
-        <li>scores: Corresponding predicted scores (float array)</li>
+        <li>scores: Corresponding predicted scores (float)</li>
       </ul>
 
       <ul>
@@ -55,9 +55,9 @@
       </ul>
 
 <pre>[
-  {"video_name": "video_001.mp4", "scores": [0.92, 0.85, 0.78]},
-  {"video_name": "video_002.mp4", "scores": [0.88, 0.91, 0.82]},
-  {"video_name": "video_003.mp4", "scores": [0.95, 0.87, 0.89]}
+  {"video_name": "video_001.mp4", "scores": 0.92},
+  {"video_name": "video_002.mp4", "scores": 0.88},
+  {"video_name": "video_003.mp4", "scores": 0.95}
 ]</pre>
       
         <li class="no-bullet"><strong>Technical guidance:</strong></li>
@@ -127,8 +127,9 @@ Measurement Iterations: 1000
         <li class="no-bullet">	(2)Store computational metrics and system configurations in a standardized text file <span class="highlight">benchmark_report.txt</span> using human-readable key-value pairs according to requirement B,C,D</li>
         <li class="no-bullet">	(3)(Optional) Create a paper in the VCIP paper template to describe the designed VQA method for this challenge. It should give a detailed description of the proposed evaluation scheme and the computational complexity analysis.</li>
         <li class="no-bullet">  (4)Create and send a ZIP package named <span class="highlight">submission.zip</span>, which contains the result.json, benchmark_report.txt files and the research paper (if any).</li>
+        <li class="no-bullet">  (5)<strong>DATASET can be download at <a href=" https://pan.baidu.com/s/1Rf2V1orbPc7Z4PXdvBLnWA" target="_blank">百度网盘 (提取码: 36a8)</a></strong></li>
       </ul>
-
+      
       <p class="subsection-title">Important Dates:</p>
       <ul>
         <li>2025.04.20: Release of train and validation data</li>
