@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -153,4 +154,55 @@ nav ul li a.active {
 }
 .active-content {
   display: block; /* 激活内容区域 */
+}
+
+@media (max-width: 768px) {
+  html, body {
+    font-size: 16px; /* 字体稍小，适配小屏 */
+    padding: 0;
+    margin: 0;
+  }
+
+  header {
+    padding: 20px 10px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .challenge-title h2 {
+    font-size: 1.4em;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .challenge-details {
+    margin: 30px 20px;
+    padding: 20px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav ul li {
+    text-align: center;
+  }
+
+  nav ul li a {
+    font-size: 18px;
+    padding: 10px 0;
+  }
+
+  .content-section {
+    padding: 15px;
+  }
+
+  footer {
+    padding: 10px;
+    font-size: 0.9em;
+    margin-top: 50px;
+  }
 }
