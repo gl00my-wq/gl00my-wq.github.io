@@ -158,9 +158,8 @@ nav ul li a.active {
 
 @media (max-width: 768px) {
   html, body {
-    font-size: 16px; /* 字体稍小，适配小屏 */
-    padding: 0;
-    margin: 0;
+    font-size: 16px;
+    flex-direction: column;
   }
 
   header {
@@ -172,37 +171,68 @@ nav ul li a.active {
   }
 
   .challenge-title h2 {
-    font-size: 1.4em;
-    padding-left: 20px;
-    padding-right: 20px;
+    font-size: 1.2em;
+    padding: 0 15px;
+    text-align: center;
   }
 
   .challenge-details {
-    margin: 30px 20px;
+    margin: 20px;
     padding: 20px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   nav ul {
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
   }
 
   nav ul li {
-    text-align: center;
+    width: 100%;
   }
 
   nav ul li a {
-    font-size: 18px;
-    padding: 10px 0;
+    font-size: 16px;
+    padding: 10px;
   }
 
   .content-section {
     padding: 15px;
+    font-size: 16px;
+  }
+
+  .content-section p,
+  .content-section li {
+    font-size: 16px;
+  }
+
+  pre {
+    font-size: 14px;
+    padding: 8px;
   }
 
   footer {
+    font-size: 14px;
     padding: 10px;
-    font-size: 0.9em;
-    margin-top: 50px;
+    margin-top: 40px;
+  }
+
+  p.subsection-title {
+    font-size: 1.4em;
+    margin: 15px 0;
+  }
+
+  ul {
+    padding-left: 15px;
+  }
+
+  ul li {
+    margin-left: 10px;
+  }
+
+  .formula {
+    font-size: 1.4em;
+    padding: 8px;
   }
 }
