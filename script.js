@@ -26,6 +26,7 @@ function loadContent5() {
        <td>${item.team}</td>
        <td>${item.contact}</td>
        <td>${item.srcc.toFixed(4)}</td>
+       <td>${item.plcc}</td>
       `;
     
       tbody.appendChild(row);
