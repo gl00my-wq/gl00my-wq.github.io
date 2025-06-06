@@ -23,6 +23,8 @@
         <li><a href="#" onclick="showContent(2)">Submission Requirements</a></li>
         <li><a href="#" onclick="showContent(3)">Evaluation Criteria</a></li>
         <li><a href="#" onclick="showContent(4)">Organizers</a></li>
+        <li><a href="#" onclick="showContent(5)">Result ranking</a></li>
+
       </ul>
     </nav>
   
@@ -205,6 +207,29 @@ Measurement Iterations: 1000
       </div>
     
     </div>
+    <div id="content5" class="content-section">
+      <p class="subsection-title">Test submission requirements</p>
+      <p>The test results can be submitted to email <a href="mailto:FeiWenQi2024@163.com">FeiWenQi2024@163.com</a>, including the <strong>team name, contact information (email), and results.json(in the format required by Submision Requirement.)</strong>
+         This table is for reference only, and the final competition results will be based on the content of the submittion.zip compressed file required by Submision Requirements.</p>
+      <p class="subsection-title">Competition Results:</p>
+      <div class="table-wrapper">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Team Name</th>
+              <th>Contact</th>
+              <th>SRCC</th>
+            </tr>
+          </thead>
+          <tbody id="resultsTable">
+            <!-- 动态插入 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+      
+      
 
   </section>
   <div class="content"></div>

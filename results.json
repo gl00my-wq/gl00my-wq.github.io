@@ -1,0 +1,6 @@
+[
+     { "team": "test1", "contact": "alpha@example.com", "srcc": 0.010 },
+     { "team": "test2", "contact": "beta@example.com", "srcc": 0.002 },
+     { "team": "test3", "contact": "vision@lab.edu", "srcc": 0.003 }
+    ]
+    
