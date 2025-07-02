@@ -1,5 +1,7 @@
 [
-     { "team": "HZX Force", "contact": "xshao@baai.ac.cn", "srcc": 0.8885 ,"plcc": 0.8868}
+     { "team": "HZX Force", "contact": "xshao@baai.ac.cn", "srcc": 0.8885 ,"plcc": 0.8868},
+     { "team": "chu_data", "contact": "Huangyipo@hotmail.com", "srcc": 0.8620 ,"plcc": 0.8569},
+     { "team": "CVAI-CUMT", "contact": "zhuhancheng@cumt.edu.cn", "srcc": 0.8557 ,"plcc": 0.8410}
      
     ]
     
