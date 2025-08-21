@@ -1,7 +1,7 @@
 [
-     { "team": "HZX Force", "contact": "xshao@baai.ac.cn", "srcc": 0.8885 ,"plcc": 0.8868},
-     { "team": "chu_data", "contact": "Huangyipo@hotmail.com", "srcc": 0.8620 ,"plcc": 0.8569},
-     { "team": "CVAI-CUMT", "contact": "zhuhancheng@cumt.edu.cn", "srcc": 0.8557 ,"plcc": 0.8410},
-     { "team": "EfficientAI", "contact": "shinde@iitmz.ac.in", "srcc": 0.7391 ,"plcc": 0.7425}
-    ]
-    
+    { "team": "HZX Force", "contact": "xshao@baai.ac.cn", "srcc": 0.8885 ,"plcc": 0.8868},
+    { "team": "chu_data", "contact": "Huangyipo@hotmail.com", "srcc": 0.8620 ,"plcc": 0.8569},
+    { "team": "CVAI-CUMT", "contact": "zhuhancheng@cumt.edu.cn", "srcc": 0.8557 ,"plcc": 0.8410},
+    { "team": "EfficientAI", "contact": "shinde@iitmz.ac.im", "srcc": 0.8497 ,"plcc": 0.8387},
+    { "team": "MoammadAli", "contact": "hamidi.alii1990@gmail.com", "srcc": 0.8917 ,"plcc": 0.8908}
+]
