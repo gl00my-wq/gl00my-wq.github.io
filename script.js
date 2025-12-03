@@ -22,7 +22,7 @@ function loadContent5() {
       const row = document.createElement("tr");
     
       row.innerHTML = `
-       <td>${item.rank}</td> <!-- Rank 从 1 开始 -->
+       <td>${item.Rank}</td> <!-- Rank 从 1 开始 -->
        <td>${item.team}</td>
        <td>${item.contact}</td>
        <td>${item.srcc.toFixed(4)}</td>
