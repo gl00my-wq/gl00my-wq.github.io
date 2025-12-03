@@ -87,7 +87,10 @@ nav ul li a:hover {
   flex: 1;
 
 }
-
+.styled-table {
+  width: 100%;    /* 铺满容器 */
+  table-layout: fixed; /* 表格按设定宽度布局 */
+}
 pre {
   background-color: #f0f0f0;
   padding: 10px;

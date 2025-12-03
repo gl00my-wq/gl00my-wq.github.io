@@ -24,7 +24,6 @@ function loadContent5() {
       row.innerHTML = `
        <td>${item.Rank}</td> <!-- Rank 从 1 开始 -->
        <td>${item.team}</td>
-    
        <td>${item.srcc.toFixed(4)}</td>
        <td>${item.plcc}</td>
        <td>${item.note}</td>
