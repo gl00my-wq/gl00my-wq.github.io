@@ -13,7 +13,7 @@ function loadContent5() {
   }
   function fillResultsTable(data) {
      // 按 SRCC 值降序排列
-     data.sort((a, b) => b.srcc - a.srcc);
+    //  data.sort((a, b) => b.srcc - a.srcc);
     
      const tbody = document.getElementById("resultsTable");
      tbody.innerHTML = ""; // 清空旧内容
@@ -22,11 +22,12 @@ function loadContent5() {
       const row = document.createElement("tr");
     
       row.innerHTML = `
-       <td>${index + 1}</td> <!-- Rank 从 1 开始 -->
+       <td>${item.rank}</td> <!-- Rank 从 1 开始 -->
        <td>${item.team}</td>
        <td>${item.contact}</td>
        <td>${item.srcc.toFixed(4)}</td>
        <td>${item.plcc}</td>
+       <td>${item.note}</td>
       `;
     
       tbody.appendChild(row);
