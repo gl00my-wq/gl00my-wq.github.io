@@ -195,7 +195,7 @@
                 currentUser = u;
                 document.getElementById('login-page').style.display = 'none';
                 document.getElementById('main-page').style.display = 'block';
-                document.getElementById('welcome-name').innerText = u === 'master' ? '亲爱的主人' : '乖乖小狗';
+                document.getElementById('welcome-name').innerText = u === 'master' ? '1' : '2';
                 document.getElementById('role-tag').innerText = u.toUpperCase();
                 await initCloudData();
             } else {
@@ -204,18 +204,31 @@
         }
 
         async function initCloudData() {
-            const query = new AV.Query('CouponData');
-            cloudObject = await query.first();
+            try {
+                const query = new AV.Query('CouponData');
+                cloudObject = await query.first();
 
-            if (!cloudObject) {
-                const CouponData = AV.Object.extend('CouponData');
-                cloudObject = new CouponData();
-                config.forEach(item => cloudObject.set(item.id, 0));
-                cloudObject.set('lastUpdate', "");
-                await cloudObject.save();
+                if (!cloudObject) {
+                    console.log("云端无数据，正在创建初始记录...");
+                    const CouponData = AV.Object.extend('CouponData');
+                    const newObject = new CouponData();
+                    
+                    // 赋初值
+                    config.forEach(item => newObject.set(item.id, 0));
+                    newObject.set('lastUpdate', "");
+                    
+                    // 保存并获取返回的对象
+                    cloudObject = await newObject.save();
+                    console.log("数据初始化成功，ObjectId:", cloudObject.id);
+                } else {
+                    console.log("成功连接到云端数据，ID:", cloudObject.id);
+                }
+                render();
+                checkMondayUpdate();
+            } catch (error) {
+                console.error("LeanCloud 初始化失败:", error);
+                showPopup("同步失败", "无法连接到云数据库，请检查网络或权限设置", false);
             }
-            render();
-            checkMondayUpdate();
         }
 
         async function checkMondayUpdate() {
