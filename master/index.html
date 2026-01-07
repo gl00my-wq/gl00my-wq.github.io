@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专属券管理系统 v2.2</title>
+    <style>
+        :root {
+            --primary-color: #ffb7c5;
+            --secondary-color: #ff7e5f;
+            --bg-color: #fdf6f7;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 登录页面 */
+        #login-page {
+            margin-top: 80px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255,183,197,0.3);
+            text-align: center;
+            width: 85%;
+            max-width: 320px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        /* 主页面 */
+        #main-page {
+            display: none;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        header {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .coupon-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .coupon-card {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .coupon-card img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border: 2px solid #f0f0f0;
+        }
+
+        .count {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin: 5px 0;
+        }
+
+        button {
+            background: var(--primary-color);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        button:active { opacity: 0.8; transform: scale(0.95); }
+
+        .sync-btn {
+            background: #eee;
+            color: #666;
+            font-size: 11px;
+            width: auto;
+            margin: 10px 5px;
+            padding: 5px 10px;
+        }
+
+        .hidden { display: none !important; }
+
+        /* 弹窗样式 */
+        #custom-alert {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+            z-index: 1000;
+            width: 75%;
+            max-width: 280px;
+            text-align: center;
+            border-top: 6px solid var(--primary-color);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-page">
+        <h2 style="color: #ff7e5f;">💑 契约系统</h2>
+        <input type="text" id="username" class="login-input" placeholder="账号 (master / dog)">
+        <input type="password" id="password" class="login-input" placeholder="密码">
+        <button onclick="login()" style="background: linear-gradient(to right, #ff9a9e, #fecfef); margin-top: 20px;">开启系统</button>
+    </div>
+
+    <div id="main-page">
+        <header>
+            <div>
+                <span id="role-tag" style="font-size: 10px; background: #ffebee; color: #ff7e5f; padding: 2px 8px; border-radius: 10px; font-weight: bold;"></span>
+                <div id="welcome-name" style="font-weight: bold; font-size: 18px; margin-top: 5px;"></div>
+            </div>
+            <button onclick="location.reload()" style="width: auto; background: #eee; color: #666; font-size: 12px; padding: 5px 12px;">退出</button>
+        </header>
+
+        <div class="coupon-grid" id="coupon-container"></div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="sync-btn" onclick="exportData()">📤 导出暗号(同步给对方)</button>
+            <button class="sync-btn" onclick="importData()">📥 导入暗号(同步数据)</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div id="custom-alert">
+        <h3 id="alert-title" style="margin-top: 0; color: #ff7e5f;">提示</h3>
+        <p id="alert-msg" style="color: #444; word-break: break-all; font-size: 14px;"></p>
+        <p id="alert-time" style="font-size: 11px; color: #aaa; margin: 15px 0;"></p>
+        <button id="alert-btn" onclick="closeAlert()" style="background: #ffb7c5;">确定</button>
+    </div>
+
+    <script>
+        // 图片配置 (使用了你提供的 img/ 路径)
+        const config = [
+            { id: 'obey', name: '听话卷', img: 'https://cdn-icons-png.flaticon.com/512/3047/3047928.png' },
+            { id: 'tea', name: '奶茶卷', img: 'img/drink.jpg' }, 
+            { id: 'food', name: '美食卷', img: 'img/ear.jpg' }, 
+            { id: 'massage', name: '按摩卷', img: 'img/rest.jpg' }
+        ];
+
+        // 初始化数据
+        let data = JSON.parse(localStorage.getItem('couponSystemData_v2')) || {
+            obey: 0, tea: 0, massage: 0, food: 0, lastUpdateDate: ""
+        };
+
+        let currentUser = "";
+
+        // 登录
+        function login() {
+            const u = document.getElementById('username').value.trim().toLowerCase();
+            const p = document.getElementById('password').value;
+            if (u === 'master' && p === 'master123') enterSystem('master');
+            else if (u === 'dog' && p === 'hjwdog') enterSystem('dog');
+            else showPopup("登录失败", "账号或密码错误", false);
+        }
+
+        function enterSystem(role) {
+            currentUser = role;
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('main-page').style.display = 'block';
+            document.getElementById('welcome-name').innerText = role === 'master' ? '亲爱的主人' : '乖乖小狗';
+            document.getElementById('role-tag').innerText = role.toUpperCase();
+            checkMondayUpdate();
+            render();
+        }
+
+        // 周一自动加1
+        function checkMondayUpdate() {
+            const now = new Date();
+            const todayStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+            if (now.getDay() === 1 && data.lastUpdateDate !== todayStr) {
+                data.tea += 1;
+                data.lastUpdateDate = todayStr;
+                save();
+                showPopup("系统更新", "周一奶茶福利已到账！", true);
+            }
+        }
+
+        // 手动导出数据
+        function exportData() {
+            const dataStr = btoa(JSON.stringify(data)); // 转码成暗号
+            showPopup("复制暗号给另一台设备", dataStr, false);
+        }
+
+        // 手动导入数据
+        function importData() {
+            const code = prompt("请输入对方发给你的暗号：");
+            if (code) {
+                try {
+                    const decodedData = JSON.parse(atob(code));
+                    data = decodedData;
+                    save();
+                    render();
+                    showPopup("成功", "数据已同步！", false);
+                } catch (e) {
+                    alert("暗号格式不对哦~");
+                }
+            }
+        }
+
+        function changeCount(id, delta) {
+            const item = config.find(c => c.id === id);
+            if (currentUser === 'dog' && delta < 0) {
+                if (data[id] <= 1) {
+                    showPopup("余额不足", `【${item.name}】必须大于1张才行~`, false);
+                    return;
+                }
+                showPopup("使用成功", `已消耗一张【${item.name}】`, true);
+            }
+            data[id] += delta;
+            save();
+            render();
+        }
+
+        function showPopup(title, msg, showTime) {
+            document.getElementById('alert-title').innerText = title;
+            document.getElementById('alert-msg').innerText = msg;
+            document.getElementById('alert-time').innerText = showTime ? "时间：" + new Date().toLocaleString() : "";
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('custom-alert').style.display = 'block';
+        }
+
+        function closeAlert() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('custom-alert').style.display = 'none';
+        }
+
+        function save() { localStorage.setItem('couponSystemData_v2', JSON.stringify(data)); }
+
+        function render() {
+            const container = document.getElementById('coupon-container');
+            container.innerHTML = "";
+            config.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'coupon-card';
+                card.innerHTML = `
+                    <img src="${item.img}" onerror="this.src='https://via.placeholder.com/90?text=Error'">
+                    <div style="font-size:13px; color:#888">${item.name}</div>
+                    <div class="count">${data[item.id]}</div>
+                    <button class="${currentUser === 'master' ? '' : 'hidden'}" onclick="changeCount('${item.id}', 1)" style="background:#b8e994; color:#386641">颁发</button>
+                    <button class="${currentUser === 'dog' ? '' : 'hidden'}" onclick="changeCount('${item.id}', -1)" style="background:#ff7e5f">使用</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
