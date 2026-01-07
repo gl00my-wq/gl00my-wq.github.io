@@ -141,7 +141,7 @@
 
     <div id="login-page">
         <h2 style="color: #ff7e5f;">💑 契约系统(云同步)</h2>
-        <input type="text" id="username" class="login-input" placeholder="账号 (master / dog)">
+        <input type="text" id="username" class="login-input" >
         <input type="password" id="password" class="login-input" placeholder="密码">
         <button onclick="login()" style="background: linear-gradient(to right, #ff9a9e, #fecfef); margin-top: 20px;">开启系统</button>
     </div>
@@ -230,7 +230,7 @@
                 showPopup("同步失败", "无法连接到云数据库，请检查网络或权限设置", false);
             }
         }
-
+        
         async function checkMondayUpdate() {
             const now = new Date();
             const todayStr = now.toDateString();
@@ -295,6 +295,13 @@
                 container.appendChild(card);
             });
         }
+            // 每 30 秒自动刷新一次数据
+        setInterval(async () => {
+            if (currentUser) {
+                console.log("正在自动同步云端数据...");
+                await initCloudData(); 
+            }
+        }, 30000);
     </script>
 </body>
 </html>
